@@ -103,7 +103,8 @@ const Form = styled.form`
   display: flex;
   width: 200px;
   position: relative;
-  left: 590px;
+  left: 150px;
+  top: 30px;
 `;
 const Button = styled.button`
   width: 58px;
