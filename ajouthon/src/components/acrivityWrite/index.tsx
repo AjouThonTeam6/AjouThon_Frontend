@@ -1,11 +1,10 @@
-import React, { EventHandler } from "react";
+import React from "react";
 import styled from "styled-components";
 import WriteDetailForm from "./DetailForm";
 import OptionForm from "./OptionForm";
 const Container = styled.div`
   width: 60rem;
   height: 40rem;
-  border: solid 1px black;
   display: flex;
   flex-direction: column;
   justify-content: center;
