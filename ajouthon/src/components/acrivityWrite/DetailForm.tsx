@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const DetailInput = styled.input.attrs({ required: true })`
+const DetailInput = styled.textarea.attrs({ required: true })`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,6 +11,8 @@ const DetailInput = styled.input.attrs({ required: true })`
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
+  white-space: normal;
+  margin-left: 530px;
 `;
 const WriteDetailForm = (props) => {
   return (
