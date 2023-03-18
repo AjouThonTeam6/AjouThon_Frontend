@@ -87,6 +87,7 @@ const Header = () => {
             <NavigationText>기록</NavigationText>
           </NavigationButton>
         </Link>
+
       </NavigationArea>
       <LogoutArea
         onClick={() => {

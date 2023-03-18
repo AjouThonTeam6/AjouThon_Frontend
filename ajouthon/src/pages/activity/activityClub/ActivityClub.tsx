@@ -47,7 +47,11 @@ const ActivityClub = () => {
   return (
     <div>
       {/* <h1>This is ActivityClub page !</h1> */}
-      <ClubTable columnData={studentClubColumn} datas={dummyData}></ClubTable>
+      <ClubTable
+        columnData={studentClubColumn}
+        datas={dummyData}
+        needCheckBox={true}
+      ></ClubTable>
       <Outlet></Outlet>
     </div>
   );

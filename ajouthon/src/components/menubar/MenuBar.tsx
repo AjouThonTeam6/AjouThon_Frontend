@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { AiOutlineRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const MenuBarContainer = styled.div`
   height: 100%;
@@ -27,7 +28,9 @@ const Menu = styled.button`
   width: 100%;
 `;
 
-const MenuText = styled.span``;
+const MenuText = styled.span`
+  margin-right: 10px;
+`;
 const ChitoImage = styled.img`
   height: 150px;
   width: 150px;
@@ -46,7 +49,11 @@ const MenuBar = () => {
           <AiOutlineRight size="18px" />
         </Menu>
         <Menu>
-          <MenuText>학사서비스 바로가기</MenuText>
+          <MenuText>
+            <Link to="https://mhaksa.ajou.ac.kr:30443/">
+              학사서비스 바로가기
+            </Link>
+          </MenuText>
           <AiOutlineRight size="18px" />
         </Menu>
       </MenuArea>
