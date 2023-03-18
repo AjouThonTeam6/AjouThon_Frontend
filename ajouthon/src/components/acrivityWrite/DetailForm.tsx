@@ -12,10 +12,10 @@ const DetailInput = styled.input.attrs({ required: true })`
   border: 1px solid #d9d9d9;
   border-radius: 2px;
 `;
-const WriteDetailForm = () => {
+const WriteDetailForm = (props) => {
   return (
     <div>
-      <DetailInput></DetailInput>
+      <DetailInput name="content" onChange={props.onChange}></DetailInput>
     </div>
   );
 };

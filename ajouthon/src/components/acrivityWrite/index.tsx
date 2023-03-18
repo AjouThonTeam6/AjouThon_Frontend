@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import WriteDetailForm from "./DetailForm";
 import OptionForm from "./OptionForm";
@@ -35,30 +35,23 @@ const FormbuttonContainer = styled.div`
   display: flex;
 `;
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-const FormElement = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 30rem;
-  padding-top: 1rem;
-`;
-
-const StyledInput = styled.input.attrs({ required: true })`
-  width: 25rem;
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
-`;
-const StyledDateInput = styled.input.attrs({ required: true })`
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
-  width: 11rem;
-`;
 const ActivityWriteForm = () => {
+  const [Inputs, setInputs] = useState({
+    name: "",
+    startPeriod: "",
+    endPeriod: "",
+    numOfPeople: 0,
+    location: "",
+    content: "",
+  });
+
+  const onChange = (e) => {
+    setInputs({
+      ...Inputs,
+      [e.target.name]: e.target.value,
+    });
+    console.log(Inputs);
+  };
   return (
     <Container>
       <StyledForm
@@ -67,11 +60,12 @@ const ActivityWriteForm = () => {
         name="activity-form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault(); // 제출 폼 백엔드 연동 필요
+          console.log(Inputs);
         }}
       >
-        <OptionForm></OptionForm>
+        <OptionForm onChange={onChange}></OptionForm>
         <StlyedButton>활동보고서 자동작성</StlyedButton>
-        <WriteDetailForm></WriteDetailForm>
+        <WriteDetailForm onChange={onChange}></WriteDetailForm>
         <FormbuttonContainer>
           <StlyedButton>저장</StlyedButton>
           <StlyedButton>저장 후 업로드</StlyedButton>
