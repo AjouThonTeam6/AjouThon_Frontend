@@ -37,11 +37,11 @@ const FormbuttonContainer = styled.div`
 
 const ActivityWriteForm = () => {
   const [Inputs, setInputs] = useState({
-    name: "",
-    startPeriod: "",
-    endPeriod: "",
-    numOfPeople: 0,
-    location: "",
+    topic: "",
+    startdate: "",
+    enddate: "",
+    participants: 0,
+    place: "",
     content: "",
   });
 
@@ -50,7 +50,6 @@ const ActivityWriteForm = () => {
       ...Inputs,
       [e.target.name]: e.target.value,
     });
-    console.log(Inputs);
   };
   return (
     <Container>
@@ -61,6 +60,10 @@ const ActivityWriteForm = () => {
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault(); // 제출 폼 백엔드 연동 필요
           console.log(Inputs);
+          fetch("http://localhost:8000/activity", {
+            method: "POST",
+            body: JSON.stringify(Inputs),
+          }).then((res) => console.log(res.body));
         }}
       >
         <OptionForm onChange={onChange}></OptionForm>
