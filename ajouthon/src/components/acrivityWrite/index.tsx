@@ -62,8 +62,14 @@ const ActivityWriteForm = () => {
           console.log(Inputs);
           fetch("http://localhost:8000/activity", {
             method: "POST",
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify(Inputs),
-          }).then((res) => console.log(res.body));
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
         }}
       >
         <OptionForm onChange={onChange}></OptionForm>
