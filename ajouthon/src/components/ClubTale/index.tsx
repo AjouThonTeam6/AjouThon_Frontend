@@ -14,7 +14,7 @@ interface ClubTableType {
 const ClubTable = ({ columnData, datas, needCheckBox }: ClubTableType) => {
   const columns = useMemo(() => columnData, []);
   const data = useMemo(() => datas, []);
-  const [allChecked, setAllChecked] = useState(false);
+  const [allChecked, setAllChecked] = useState(true);
   const checkboxRef = useRef<HTMLInputElement[]>([]);
   const {
     getTableProps,
