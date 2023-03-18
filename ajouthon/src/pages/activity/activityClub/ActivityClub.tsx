@@ -64,7 +64,6 @@ const ActivityClub = () => {
         <InfoBox title='전체 구성원' value='?명'></InfoBox>
         <InfoBox title='입부 대기중' value='?명'></InfoBox>
       </InfoBoxContainer>
-      {/* <h1>This is ActivityClub page !</h1> */}
       <ClubTable
         columnData={studentClubColumn}
         datas={dummyData}
