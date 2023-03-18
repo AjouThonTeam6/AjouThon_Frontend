@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { accountAtom } from "../../atoms/accountAtom";
 import { IAccount } from "../../interfaces/loginInterface";
+import { TfiHelpAlt } from "react-icons/tfi";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -87,7 +88,12 @@ const Header = () => {
             <NavigationText>기록</NavigationText>
           </NavigationButton>
         </Link>
-
+        <Link to="/help">
+          <NavigationButton>
+            <TfiHelpAlt size="18px" />
+            <NavigationText>도움말</NavigationText>
+          </NavigationButton>
+        </Link>
       </NavigationArea>
       <LogoutArea
         onClick={() => {
