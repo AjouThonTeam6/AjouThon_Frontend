@@ -1,10 +1,18 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import { Container } from "../../components/container/Container";
+import Header from "../../components/header/Header";
+import MenuBar from "../../components/menubar/MenuBar";
 
 const Main = () => {
   return (
-    <div>
-      <h1>This is main page !</h1>
-    </div>
+    <>
+      <MenuBar />
+      <Container>
+        <Header />
+        <Outlet />
+      </Container>
+    </>
   );
 };
 
