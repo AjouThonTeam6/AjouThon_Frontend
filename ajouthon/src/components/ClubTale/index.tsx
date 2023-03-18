@@ -39,7 +39,7 @@ const ClubTable = ({ columnData, datas, needCheckBox }: ClubTableType) => {
     }
   }, [allChecked]);
   return (
-    <>
+    <SearchTableContainer>
       <Search onSubmit={setGlobalFilter}></Search>
       <StyledTable align="center" width="800" {...getTableProps()}>
         <StyledThead>
@@ -100,7 +100,7 @@ const ClubTable = ({ columnData, datas, needCheckBox }: ClubTableType) => {
           })}
         </StyledTBody>
       </StyledTable>
-    </>
+    </SearchTableContainer>
   );
 };
 
@@ -129,4 +129,10 @@ const StyledTd = styled.td`
   vertical-align: middle;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 `;
+
+const SearchTableContainer=styled.div`
+  display:flex;
+  flex-direction:column;
+`
+
 export default ClubTable;

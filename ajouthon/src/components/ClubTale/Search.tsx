@@ -102,9 +102,10 @@ const FileLabel = styled.label``;
 const FileInput = styled.input``;
 const Form = styled.form`
   display: flex;
+  left:0px;
   width: 200px;
-  position: relative;
-  left: 590px;
+  margin-bottom: 10px;
+  margin-left: auto;
 `;
 const Button = styled.button`
   width: 58px;

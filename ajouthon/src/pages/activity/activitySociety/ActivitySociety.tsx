@@ -67,7 +67,7 @@ const MemberClub = () => {//동아리 회원 관리 페이지
         <InfoBox title='활동 내역' value={`${dummyData.length} 건`}></InfoBox>
         <InfoBox title='임시저장 내역' value={`${dummyData.length} 건`}></InfoBox>
       </InfoBoxContainer>
-      <button style={buttonSytle}>활동내역 추가</button>
+      <button>활동내역추가</button>
       <ClubTable
         columnData={ActivityModelColumn}
         datas={dummyData}
