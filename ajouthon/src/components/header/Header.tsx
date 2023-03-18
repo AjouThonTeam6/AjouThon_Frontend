@@ -64,7 +64,7 @@ const Header = () => {
             <NavigationText>동아리원 관리</NavigationText>
           </NavigationButton>
         </Link>
-        <Link to="/activity-club">
+        <Link to="/activity-club/main">
           <NavigationButton>
             <FiAward size="18px" />
             <NavigationText>동아리 활동 관리</NavigationText>
@@ -76,7 +76,7 @@ const Header = () => {
             <NavigationText>소학회원 관리</NavigationText>
           </NavigationButton>
         </Link>
-        <Link to="/activity-society">
+        <Link to="/activity-society/main">
           <NavigationButton>
             <IoFlagOutline size="18px" />
             <NavigationText>소학회 활동 관리</NavigationText>
