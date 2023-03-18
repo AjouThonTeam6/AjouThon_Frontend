@@ -8,8 +8,9 @@ interface ClubTableType {
     Header: string;
   }[];
   datas: unknown[];
+  needCheckBox: boolean;
 }
-const ClubTable = ({ columnData, datas }: ClubTableType) => {
+const ClubTable = ({ columnData, datas, needCheckBox }: ClubTableType) => {
   const columns = useMemo(() => columnData, []);
   const data = useMemo(() => datas, []);
 
@@ -22,6 +23,14 @@ const ClubTable = ({ columnData, datas }: ClubTableType) => {
       <StyledThead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
+            {needCheckBox ? (
+              <StyledTh style={{ width: "50px" }}>
+                <input type="checkbox" name="xxx" value="yyy" />
+              </StyledTh>
+            ) : (
+              <></>
+            )}
+
             {headerGroup.headers.map((column) => (
               <StyledTh {...column.getHeaderProps()}>
                 {column.render("Header")}
@@ -35,6 +44,14 @@ const ClubTable = ({ columnData, datas }: ClubTableType) => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
+              {needCheckBox ? (
+                <StyledTd>
+                  <input type="checkbox" name="xxx" value="yyy" />
+                </StyledTd>
+              ) : (
+                <></>
+              )}
+
               {row.cells.map((cell) => (
                 <StyledTd {...cell.getCellProps()}>
                   {cell.render("Cell")}
@@ -47,6 +64,12 @@ const ClubTable = ({ columnData, datas }: ClubTableType) => {
     </StyledTable>
   );
 };
+const CheckBox = styled.div`
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+`;
 const StyledTable = styled.table`
   font-family: "Roboto";
   font-style: normal;
