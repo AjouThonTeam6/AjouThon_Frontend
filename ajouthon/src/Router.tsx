@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Login from "./pages/account/login/Login";
 import ActivityClub from "./pages/activity/activityClub/ActivityClub";
@@ -34,8 +34,9 @@ const Router = () => {
             <Route path="record-club" element={<RecordClub />}></Route>
 
             <Route path="member-society" element={<MemberSociety />}></Route>
-            <Route path="activity-society" element={<ActivitySociety />}>
-              <Route path="write" element={<ActivitySociety />}></Route>
+            <Route path="activity-society" element={<><Outlet/></>}>
+              <Route path="main" element={<ActivitySociety />}></Route>
+              <Route path="write" element={<ActivityWrite />}></Route>
             </Route>
             <Route path="record-society" element={<RecordSociety />}></Route>
             <Route path="help" element={<Help />}></Route>
