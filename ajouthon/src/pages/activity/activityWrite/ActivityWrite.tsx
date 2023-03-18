@@ -1,11 +1,8 @@
 import React from "react";
+import ActivityWriteForm from "../../../components/acrivityWrite";
 
 const ActivityWrite = () => {
-  return (
-    <div>
-      <h1>This is ActivityWrite page !</h1>
-    </div>
-  );
+  return <ActivityWriteForm></ActivityWriteForm>;
 };
 
 export default ActivityWrite;
