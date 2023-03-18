@@ -34,6 +34,30 @@ const StyledForm = styled.form.attrs({ onsubmit: false })`
 const FormbuttonContainer = styled.div`
   display: flex;
 `;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const FormElement = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 30rem;
+  padding-top: 1rem;
+`;
+
+const StyledInput = styled.input.attrs({ required: true })`
+  width: 25rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+`;
+const StyledDateInput = styled.input.attrs({ required: true })`
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  width: 11rem;
+`;
 const ActivityWriteForm = () => {
   return (
     <Container>
