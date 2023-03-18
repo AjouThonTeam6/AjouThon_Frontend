@@ -24,28 +24,50 @@ const StyledDateInput = styled.input.attrs({ required: true })`
   width: 11rem;
 `;
 
-const OptionForm = () => {
+const OptionForm = (props) => {
   return (
     <FormContainer>
-      <FormElement>
-        <div>활동명 :</div>
-        <StyledInput placeholder="활동명을 입력해주세요"></StyledInput>
-      </FormElement>
-      <FormElement>
-        <div>활동기간 :</div>
-        <StyledDateInput data-placeholder="Start Date" type="date" />
-        ~
-        <StyledDateInput data-placeholder="End Date" type="date" />
-      </FormElement>
-      <FormElement>
-        <div>인원 :</div>
-        <StyledInput placeholder="인원을 입력해주세요"></StyledInput>
-      </FormElement>
-      <FormElement>
-        <div>장소 :</div>
-        <StyledInput placeholder="장소를 입력해주세요"></StyledInput>
-      </FormElement>
-    </FormContainer>
+    <FormElement>
+      <div>활동명 :</div>
+      <StyledInput
+        name="name"
+        onChange={props.onChange}
+        placeholder="활동명을 입력해주세요"
+      ></StyledInput>
+    </FormElement>
+    <FormElement>
+      <div>활동기간 :</div>
+      <StyledDateInput
+        name="startPeriod"
+        onChange={props.onChange}
+        data-placeholder="Start Date"
+        type="date"
+      />
+      ~
+      <StyledDateInput
+        name="endPeriod"
+        onChange={props.onChange}
+        data-placeholder="End Date"
+        type="date"
+      />
+    </FormElement>
+    <FormElement>
+      <div>인원 :</div>
+      <StyledInput
+        name="numOfPeople"
+        onChange={props.onChange}
+        placeholder="인원을 입력해주세요"
+      ></StyledInput>
+    </FormElement>
+    <FormElement>
+      <div>장소 :</div>
+      <StyledInput
+        name="location"
+        onChange={props.onChange}
+        placeholder="장소를 입력해주세요"
+      ></StyledInput>
+    </FormElement>
+  </FormContainer>
   );
 };
 
