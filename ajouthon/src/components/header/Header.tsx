@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FiUser, FiAward, FiEdit } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -47,16 +48,22 @@ const Header = () => {
       <NavigationArea>
         <NavigationButton>
           <FiUser size="18px" />
-          <NavigationText>동아리원 관리</NavigationText>
+          <NavigationText>
+            <Link to="/member-club">동아리원 관리</Link>
+          </NavigationText>
         </NavigationButton>
         <NavigationButton>
           <FiAward size="18px" />
 
-          <NavigationText>활동 관리</NavigationText>
+          <NavigationText>
+            <Link to="/activity-club/1">활동 관리</Link>
+          </NavigationText>
         </NavigationButton>
         <NavigationButton>
           <FiEdit size="18px" />
-          <NavigationText>기록</NavigationText>
+          <NavigationText>
+            <Link to="/record-club/1">기록</Link>
+          </NavigationText>
         </NavigationButton>
       </NavigationArea>
       <LogoutArea>
