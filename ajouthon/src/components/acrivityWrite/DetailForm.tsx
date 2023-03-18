@@ -15,7 +15,11 @@ const DetailInput = styled.input.attrs({ required: true })`
 const WriteDetailForm = (props) => {
   return (
     <div>
-      <DetailInput name="content" onChange={props.onChange}></DetailInput>
+      <DetailInput
+        value={props.value}
+        name="content"
+        onChange={props.onChange}
+      ></DetailInput>
     </div>
   );
 };
