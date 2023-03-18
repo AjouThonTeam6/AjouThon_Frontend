@@ -42,7 +42,6 @@ function Search({ onSubmit }: any) {
         target.result as any,
         {
           header: true,
-          encoding: "UTF-8",
         } as any
       );
       const parsedData = (csv as any).data;
@@ -50,7 +49,7 @@ function Search({ onSubmit }: any) {
       const columns = parsedData;
       setData(columns);
     };
-    reader.readAsText(file);
+    reader.readAsText(file, "CP949");
   };
 
   const handleSubmit = (event: any) => {
@@ -66,7 +65,7 @@ function Search({ onSubmit }: any) {
 
       <Button>Search</Button>
       <FileLabel htmlFor="file">
-        <FileContainer>파일 업로드</FileContainer>
+        <FileContainer>File Upload</FileContainer>
       </FileLabel>
       <FileInput
         onChange={handleFileChange}
@@ -75,7 +74,7 @@ function Search({ onSubmit }: any) {
         id="file"
         accept=".csv"
       />
-      <button onClick={handleParse}>Parse</button>
+      <Button onClick={handleParse}>Parse</Button>
     </Form>
   );
 }
