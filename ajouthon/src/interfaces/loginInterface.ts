@@ -1,1 +1,4 @@
-export interface ILogin {}
+export interface IAccount {
+  id: string;
+  pw: string;
+}
