@@ -28,13 +28,21 @@ const Router = () => {
             <Route path="member-club" element={<MemberClub />}>
               {/* <Route path=":clubId" element={</>}></Route> */}
             </Route>
-            <Route path="activity-club" element={<ActivityClub />}>
+            <Route path="activity-club" element={<Outlet />}>
+              <Route path="main" element={<ActivityClub />}></Route>
               <Route path="write" element={<ActivityWrite />}></Route>
             </Route>
             <Route path="record-club" element={<RecordClub />}></Route>
 
             <Route path="member-society" element={<MemberSociety />}></Route>
-            <Route path="activity-society" element={<><Outlet/></>}>
+            <Route
+              path="activity-society"
+              element={
+                <>
+                  <Outlet />
+                </>
+              }
+            >
               <Route path="main" element={<ActivitySociety />}></Route>
               <Route path="write" element={<ActivityWrite />}></Route>
             </Route>
