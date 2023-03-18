@@ -8,7 +8,7 @@ import InfoBox from "../../components/infobox/InfoBox";
 const Main = () => {
   return (
     <>
-      <MenuBar />
+      {/* <MenuBar /> */}
       <Container>
         <Header />
         <Outlet />
