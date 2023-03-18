@@ -3,11 +3,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Papa from "papaparse";
+import { useRecoilState } from "recoil";
+import { infoAtom } from "../../atoms/infoAtom";
 
 const allowedExtensions = ["csv"];
 
 function Search({ onSubmit }: any) {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useRecoilState(infoAtom);
 
   const [error, setError] = useState("");
 
@@ -64,6 +66,7 @@ function Search({ onSubmit }: any) {
       <Input name="filter" />
 
       <Button>Search</Button>
+      <Button>Submit</Button>
       <FileLabel htmlFor="file">
         <FileContainer>File Upload</FileContainer>
       </FileLabel>
@@ -83,7 +86,7 @@ const FileContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 75px;
-  height: 32px;
+  height: 38px;
   background: #1890ff;
   border: 1px solid #1890ff;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
@@ -108,7 +111,7 @@ const Form = styled.form`
 `;
 const Button = styled.button`
   width: 58px;
-  height: 32px;
+  height: 38px;
   background: #1890ff;
   border: 1px solid #1890ff;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
@@ -126,7 +129,7 @@ const Input = styled.input`
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   width: 400px;
-  height: 32px;
+  height: 38px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;

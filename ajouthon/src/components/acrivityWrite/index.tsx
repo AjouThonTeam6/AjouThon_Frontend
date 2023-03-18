@@ -57,10 +57,10 @@ const ActivityWriteForm = () => {
         action="/"
         method="post"
         name="activity-form"
-        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+        onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault(); // 제출 폼 백엔드 연동 필요
           console.log(Inputs);
-          fetch("http://localhost:8000/activity", {
+          await fetch("http://localhost:8000/activity", {
             method: "POST",
             headers: {
               accept: "application/json",
@@ -69,15 +69,34 @@ const ActivityWriteForm = () => {
             body: JSON.stringify(Inputs),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              console.log(data);
+              setInputs({ ...Inputs, content: data.message });
+              console.log(Inputs);
+            });
         }}
       >
         <OptionForm onChange={onChange}></OptionForm>
         <StlyedButton>활동보고서 자동작성</StlyedButton>
-        <WriteDetailForm onChange={onChange}></WriteDetailForm>
+        <WriteDetailForm
+          value={Inputs.content}
+          onChange={onChange}
+        ></WriteDetailForm>
         <FormbuttonContainer>
-          <StlyedButton>저장</StlyedButton>
-          <StlyedButton>저장 후 업로드</StlyedButton>
+          {/* <StlyedButton>저장</StlyedButton> */}
+          <StlyedButton
+            onClick={async () => {
+              await fetch("http://localhost:8000/activity/upload", {
+                method: "POST",
+                body: JSON.stringify({
+                  topic: Inputs.topic,
+                  content: Inputs.content,
+                }),
+              });
+            }}
+          >
+            학사서비스 등록
+          </StlyedButton>
         </FormbuttonContainer>
       </StyledForm>
     </Container>
