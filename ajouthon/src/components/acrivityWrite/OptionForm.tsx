@@ -30,7 +30,7 @@ const OptionForm = (props) => {
     <FormElement>
       <div>활동명 :</div>
       <StyledInput
-        name="name"
+        name="topic"
         onChange={props.onChange}
         placeholder="활동명을 입력해주세요"
       ></StyledInput>
@@ -38,14 +38,14 @@ const OptionForm = (props) => {
     <FormElement>
       <div>활동기간 :</div>
       <StyledDateInput
-        name="startPeriod"
+        name="startdate"
         onChange={props.onChange}
         data-placeholder="Start Date"
         type="date"
       />
       ~
       <StyledDateInput
-        name="endPeriod"
+        name="enddate"
         onChange={props.onChange}
         data-placeholder="End Date"
         type="date"
@@ -54,7 +54,7 @@ const OptionForm = (props) => {
     <FormElement>
       <div>인원 :</div>
       <StyledInput
-        name="numOfPeople"
+        name="participants"
         onChange={props.onChange}
         placeholder="인원을 입력해주세요"
       ></StyledInput>
@@ -62,7 +62,7 @@ const OptionForm = (props) => {
     <FormElement>
       <div>장소 :</div>
       <StyledInput
-        name="location"
+        name="place"
         onChange={props.onChange}
         placeholder="장소를 입력해주세요"
       ></StyledInput>
