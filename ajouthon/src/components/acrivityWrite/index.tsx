@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import WriteDetailForm from './DetailForm';
-import OptionForm from './OptionForm';
+import React, { useState } from "react";
+import styled from "styled-components";
+import WriteDetailForm from "./DetailForm";
+import OptionForm from "./OptionForm";
 const Container = styled.div`
   width: 60rem;
   height: 40rem;
@@ -17,7 +17,7 @@ const StlyedButton = styled.button`
   border-radius: 2px;
   color: #ffffff;
   margin: 0.5rem 0 1.5rem 0.5rem;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -37,12 +37,12 @@ const FormbuttonContainer = styled.div`
 
 const ActivityWriteForm = () => {
   const [Inputs, setInputs] = useState({
-    topic: '',
-    startdate: '',
-    enddate: '',
+    topic: "",
+    startdate: "",
+    enddate: "",
     participants: 0,
-    place: '',
-    content: '',
+    place: "",
+    content: "",
   });
 
   const onChange = (e) => {
@@ -60,11 +60,11 @@ const ActivityWriteForm = () => {
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault(); // 제출 폼 백엔드 연동 필요
           console.log(Inputs);
-          await fetch('http://localhost:8000/activity', {
-            method: 'POST',
+          await fetch("http://localhost:8000/activity", {
+            method: "POST",
             headers: {
-              accept: 'application/json',
-              'Content-Type': 'application/json',
+              accept: "application/json",
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(Inputs),
           })
@@ -86,12 +86,9 @@ const ActivityWriteForm = () => {
           {/* <StlyedButton>저장</StlyedButton> */}
           <StlyedButton
             onClick={async () => {
-              await fetch('http://localhost:8000/activity/upload', {
-                method: 'POST',
-                headers: {
-                  accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
+              await fetch("http://localhost:8000/activity/upload", {
+                method: "POST",
+
                 body: JSON.stringify({
                   topic: Inputs.topic,
                   content: Inputs.content,

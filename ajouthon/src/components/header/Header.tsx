@@ -82,12 +82,12 @@ const Header = () => {
             <NavigationText>소학회 활동 관리</NavigationText>
           </NavigationButton>
         </Link>
-        <Link to="/">
+        {/* <Link to="/">
           <NavigationButton>
             <FiEdit size="18px" />
             <NavigationText>기록</NavigationText>
           </NavigationButton>
-        </Link>
+        </Link> */}
         <Link to="/help">
           <NavigationButton>
             <TfiHelpAlt size="18px" />

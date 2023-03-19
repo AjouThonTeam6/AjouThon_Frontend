@@ -66,7 +66,6 @@ function Search({ onSubmit }: any) {
       <Input name="filter" />
 
       <Button>Search</Button>
-      <Button>Submit</Button>
       <FileLabel htmlFor="file">
         <FileContainer>File Upload</FileContainer>
       </FileLabel>
