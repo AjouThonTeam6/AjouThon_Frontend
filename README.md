@@ -36,6 +36,8 @@
 
 <img src="https://github.com/WooHyunKing/LetEatGoApplication/assets/87849920/224d0a7a-6cb7-46d6-988e-f447aa11b6bc">
 
+<br/>
+
 ## 기능 소개 1 - 동아리원 등록 자동화 👥
 
 > 1. 아주대학교 통합 로그인
@@ -53,9 +55,13 @@
 > 4. 엑셀파일 업로드 및 학사서비스 등록
 <img src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/6c68667a-36e2-4e76-b8e3-ae6327e225e7">
 
+<br/>
+
 ## 동아리원 등록 자동화 시연영상 🎥
 
 <img src="https://github.com/WooHyunKing/LetEatGoApplication/assets/87849920/ff6417e1-e621-4c0b-8ad4-da646e7c195d">
+
+<br/>
 
 ## 기능 소개 2 - 동아리 활동 보고서 자동작성 및 등록 🤖
 
@@ -65,11 +71,15 @@
 > 2. 챗 GPT 기반 보고서 자동작성 및 학사서비스 등록
 <img src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/e01c8071-adc5-42af-b771-82370bae44af">
 
+<br/>
+
 ## 동아리 활동 보고서 자동작성 및 등록 시연영상 🎥
 
 <img src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/c36fcf29-8a88-4dcc-ade6-cad7ed28e9bf">
 
 <img src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/8dd3d427-9354-4202-95ec-8bb5c5cf2b98">
+
+<br/>
 
 ## 기대효과 ✨
 
@@ -79,6 +89,7 @@
 
 <img src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/da447593-46f9-4760-b809-26283fed3ba6">
 
+<br/>
 
 ## 프로젝트 성과 🏆
 
@@ -87,6 +98,8 @@
 
 <img width="45%" src="https://github.com/AjouThonTeam6/AjouThon_Frontend/assets/87849920/49f865db-86ac-4866-a034-d3c16c8565d3">
 </div>
+
+<br/>
 
 ## 발표자료 📄
 [아주톤 6조 발표자료.pdf](https://github.com/AjouThonTeam6/AjouThon_Frontend/files/11069648/6.pdf)
