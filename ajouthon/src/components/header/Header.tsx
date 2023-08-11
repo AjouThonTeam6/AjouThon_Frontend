@@ -8,50 +8,6 @@ import { accountAtom } from "../../atoms/accountAtom";
 import { IAccount } from "../../interfaces/loginInterface";
 import { TfiHelpAlt } from "react-icons/tfi";
 
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
-`;
-
-const NavigationArea = styled.div`
-  display: flex;
-`;
-
-const NavigationButton = styled.button`
-  display: flex;
-  justify-content: center;
-  padding: 13px 20px;
-  background-color: white;
-  color: #8c8c8c;
-  margin-right: 10px;
-  cursor: pointer;
-`;
-
-const NavigationText = styled.span`
-  font-size: 18px;
-  margin-left: 5px;
-`;
-
-const LogoutArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-
-const LogoutText = styled.span`
-  color: #8c8c8c;
-  margin-left: 5px;
-`;
-
-const AjouLogo = styled.img`
-  width: 40px;
-  height: 40px;
-`;
-
 const Header = () => {
   const [account, setAccount] = useRecoilState<IAccount>(accountAtom);
   const navigate = useNavigate();
@@ -109,3 +65,47 @@ const Header = () => {
 };
 
 export default Header;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+`;
+
+const NavigationArea = styled.div`
+  display: flex;
+`;
+
+const NavigationButton = styled.button`
+  display: flex;
+  justify-content: center;
+  padding: 13px 20px;
+  background-color: white;
+  color: #8c8c8c;
+  margin-right: 10px;
+  cursor: pointer;
+`;
+
+const NavigationText = styled.span`
+  font-size: 18px;
+  margin-left: 5px;
+`;
+
+const LogoutArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+`;
+
+const LogoutText = styled.span`
+  color: #8c8c8c;
+  margin-left: 5px;
+`;
+
+const AjouLogo = styled.img`
+  width: 40px;
+  height: 40px;
+`;

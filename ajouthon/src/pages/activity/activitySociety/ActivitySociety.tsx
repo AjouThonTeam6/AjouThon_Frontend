@@ -6,6 +6,33 @@ import ClubTable from "../../../components/ClubTale";
 import { ActivityModelColumn } from "../../../model/activityTableModel";
 import { Link } from "react-router-dom";
 
+const MemberClub = () => {
+  //동아리 회원 관리 페이지
+  return (
+    <OuterContainer>
+      <InfoBoxContainer>
+        <InfoBox title="활동 내역" value={`${dummyData.length} 건`}></InfoBox>
+        <InfoBox
+          title="임시저장 내역"
+          value={`${dummyData.length} 건`}
+        ></InfoBox>
+      </InfoBoxContainer>
+      <Link to="../write">
+        <button style={buttonSytle}>활동내역 추가</button>
+      </Link>
+
+      <ClubTable
+        columnData={ActivityModelColumn}
+        datas={dummyData}
+        needCheckBox={true}
+      ></ClubTable>
+      <button style={buttonSytle}>학사서비스 업로드</button>
+    </OuterContainer>
+  );
+};
+
+export default MemberClub;
+
 export const dummyData = [
   {
     활동명: "1",
@@ -60,30 +87,3 @@ const buttonSytle = {
   width: "8rem",
   fontWeight: "bold",
 };
-
-const MemberClub = () => {
-  //동아리 회원 관리 페이지
-  return (
-    <OuterContainer>
-      <InfoBoxContainer>
-        <InfoBox title="활동 내역" value={`${dummyData.length} 건`}></InfoBox>
-        <InfoBox
-          title="임시저장 내역"
-          value={`${dummyData.length} 건`}
-        ></InfoBox>
-      </InfoBoxContainer>
-      <Link to="../write">
-        <button style={buttonSytle}>활동내역 추가</button>
-      </Link>
-
-      <ClubTable
-        columnData={ActivityModelColumn}
-        datas={dummyData}
-        needCheckBox={true}
-      ></ClubTable>
-      <button style={buttonSytle}>학사서비스 업로드</button>
-    </OuterContainer>
-  );
-};
-
-export default MemberClub;
