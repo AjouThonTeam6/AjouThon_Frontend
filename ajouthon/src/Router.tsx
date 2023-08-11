@@ -12,13 +12,6 @@ import MemberSociety from "./pages/member/memberSociety/MemberSociety";
 import RecordClub from "./pages/record/recordClub/RecordClub";
 import RecordSociety from "./pages/record/recordSociety/RecordSociety";
 
-const TopContainer = styled.div`
-  display: flex;
-  width: 1440px;
-  height: 900px;
-  border: 1px solid black;
-`;
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -57,3 +50,10 @@ const Router = () => {
 };
 
 export default Router;
+
+const TopContainer = styled.div`
+  display: flex;
+  width: 1440px;
+  height: 900px;
+  border: 1px solid black;
+`;

@@ -72,6 +72,7 @@ const HelpCommand = styled.div`
   font-weight: bold;
   line-height: 25px;
 `;
+
 const Help = () => {
   return (
     <HelpOuterContainer>
