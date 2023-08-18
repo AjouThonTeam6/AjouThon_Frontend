@@ -8,7 +8,7 @@ import axios from "axios";
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [asmlRequest, setAsmlRequest] = useState("");
+  const [samlResponse, setSamlResponse] = useState("");
   const [account, setAccount] = useRecoilState(accountAtom);
   const navigate = useNavigate();
 
@@ -25,16 +25,24 @@ const Login = () => {
         relogin: "N",
         userId: id,
         password: password,
+        token: null,
+        mobileAgentType: null,
+        userAgentIp: null,
       },
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          Referer: "https://sso.ajou.ac.kr/jsp/sso/ip/login_form.jsp",
+          Origin: "https://sso.ajou.ac.kr",
+          Host: "sso.ajou.ac.kr",
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
         },
       }
     );
-    // console.log(response.data);
+    console.log(response.data);
     // console.log(typeof response.data);
     // DOMParser를 사용하여 HTML을 파싱
     const parser = new DOMParser();
@@ -44,9 +52,33 @@ const Login = () => {
     if (targetElement) {
       const targetAttribute = targetElement.getAttribute("value");
       if (targetAttribute) {
-        setAsmlRequest(targetAttribute);
+        setSamlResponse(targetAttribute);
       }
     }
+
+    loginSuccess();
+  }
+
+  async function loginSuccess() {
+    const response = await axios.post(
+      "/auth/ssoLoginSuccess.do",
+      {
+        domainName: "exciform.com",
+        SAMLResponse: samlResponse,
+        RelayState: null,
+        returnPage: "https://mportal.ajou.ac.kr",
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        },
+        withCredentials: true,
+      }
+    );
+
+    console.log(response);
   }
 
   const onSumbit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -55,7 +87,8 @@ const Login = () => {
     loginPost(id, password);
   };
 
-  console.log(asmlRequest);
+  console.log(samlResponse);
+  console.log(document.cookie);
   return (
     <LoginContainer>
       <TextLogo src={require("../../../imgs/textLogo.png")} />
