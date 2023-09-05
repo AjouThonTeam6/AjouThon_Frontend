@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -16,6 +16,12 @@ const Login = () => {
   const [academyList, setAcademyList] = useRecoilState(studentAcademyListAtom);
   const [circleList, setCircleList] = useRecoilState(studentCircleListAtom);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") === undefined) {
+      navigate("/login");
+    }
+  }, []);
 
   const loginPost = async (id: string, password: string, studentId: string) => {
     const response = await axios.post(
