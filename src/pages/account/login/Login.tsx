@@ -4,11 +4,18 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { accountAtom } from "../../../atoms/accountAtom";
 import axios from "axios";
+import {
+  studentAcademyListAtom,
+  studentCircleListAtom,
+} from "../../../atoms/memberAtom";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [studentId, setStudentId] = useState("");
+  const [academyList, setAcademyList] = useRecoilState(studentAcademyListAtom);
+  const [circleList, setCircleList] = useRecoilState(studentCircleListAtom);
+  const navigate = useNavigate();
 
   const loginPost = async (id: string, password: string, studentId: string) => {
     const response = await axios.post(
@@ -25,14 +32,11 @@ const Login = () => {
       }
     );
 
-    // const response = await fetch("/login",{
-    //   method:"POST",
-    //   headers:{
-    //     'Content-Type': "application/json"
-    //   },
-    // })
+    sessionStorage.setItem("token", response.data.accessToken);
+    setAcademyList(response.data.studentAcademyInfo);
+    setCircleList(response.data.studentCircleInfo);
 
-    console.log(response);
+    navigate("/member-club");
   };
 
   const onSumbit = (e: React.FormEvent<HTMLFormElement>) => {
