@@ -17,12 +17,6 @@ const Login = () => {
   const [circleList, setCircleList] = useRecoilState(studentCircleListAtom);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (sessionStorage.getItem("token") === undefined) {
-      navigate("/login");
-    }
-  }, []);
-
   const loginPost = async (id: string, password: string, studentId: string) => {
     const response = await axios.post(
       "/login",

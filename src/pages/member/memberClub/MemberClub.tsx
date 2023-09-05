@@ -1,9 +1,88 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import InfoBox from "../../../components/infobox/InfoBox";
 import styled from "styled-components";
 import ClubTable from "../../../components/ClubTale";
 import { studentClubColumn } from "../../../model/tableModel";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import {
+  studentAcademyListAtom,
+  studentCircleListAtom,
+} from "../../../atoms/memberAtom";
+
+const MemberClub = () => {
+  //동아리 회원 관리 페이지
+
+  const navigate = useNavigate();
+  const academyList = useRecoilValue(studentAcademyListAtom);
+  const circleList = useRecoilValue(studentCircleListAtom);
+
+  const getDetail = async (fg: string, cd: string) => {
+    const response = await axios.get("/club", {
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+      params: {
+        // jsessionId:
+        //   "ad3Z61ERalyjP9nLDMzLaAKxTask6xWAIXltnc77MTqYCttNxjonjK0upeb3VoHI.chusa_servlet_HAKSA01",
+        // pharosVisitor: "000069f1018a582fc3804815ca1e002f",
+        meatngFg: fg,
+        meatngCd: cd,
+        // userKey: "a3591f9ae7dde4db2bcd6fc701a48407",
+      },
+    });
+    console.log(response);
+  };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") === undefined) {
+      navigate("/login");
+    }
+
+    if (academyList && academyList[0]) {
+      getDetail(academyList[0].meatngFg, academyList[0].meatngCd);
+    }
+    if (circleList && circleList[0]) {
+      getDetail(circleList[0].meatngFg, circleList[0].meatngCd);
+    }
+  }, []);
+
+  return (
+    <OuterContainer>
+      <InfoBoxContainer>
+        <InfoBox title="전체 구성원" value={`${dummyData.length} 건`}></InfoBox>
+        <InfoBox title="입부 대기중" value={`${dummyData.length} 건`}></InfoBox>
+      </InfoBoxContainer>
+      <ClubTable
+        columnData={studentClubColumn}
+        datas={dummyData}
+        needCheckBox={true}
+      ></ClubTable>
+      <Outlet></Outlet>
+      <ButtonArea>
+        <SubmitButton
+          onClick={async () => {
+            await fetch("http://localhost:8000/upload/sheet", {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data));
+          }}
+        >
+          학사서비스 등록
+        </SubmitButton>
+        <Button>삭제</Button>
+      </ButtonArea>
+    </OuterContainer>
+  );
+};
+
+export default MemberClub;
 
 export const dummyData = [
   {
@@ -86,41 +165,3 @@ const SubmitButton = styled(Button)`
 const ButtonArea = styled.div`
   display: flex;
 `;
-
-const MemberClub = () => {
-  //동아리 회원 관리 페이지
-  return (
-    <OuterContainer>
-      <InfoBoxContainer>
-        <InfoBox title="전체 구성원" value={`${dummyData.length} 건`}></InfoBox>
-        <InfoBox title="입부 대기중" value={`${dummyData.length} 건`}></InfoBox>
-      </InfoBoxContainer>
-      <ClubTable
-        columnData={studentClubColumn}
-        datas={dummyData}
-        needCheckBox={true}
-      ></ClubTable>
-      <Outlet></Outlet>
-      <ButtonArea>
-        <SubmitButton
-          onClick={async () => {
-            await fetch("http://localhost:8000/upload/sheet", {
-              method: "POST",
-              headers: {
-                accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => console.log(data));
-          }}
-        >
-          학사서비스 등록
-        </SubmitButton>
-        <Button>삭제</Button>
-      </ButtonArea>
-    </OuterContainer>
-  );
-};
-
-export default MemberClub;
