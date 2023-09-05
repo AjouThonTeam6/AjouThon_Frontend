@@ -24,19 +24,15 @@ const MemberClub = () => {
         Authorization: sessionStorage.getItem("token"),
       },
       params: {
-        // jsessionId:
-        //   "ad3Z61ERalyjP9nLDMzLaAKxTask6xWAIXltnc77MTqYCttNxjonjK0upeb3VoHI.chusa_servlet_HAKSA01",
-        // pharosVisitor: "000069f1018a582fc3804815ca1e002f",
         meatngFg: fg,
         meatngCd: cd,
-        // userKey: "a3591f9ae7dde4db2bcd6fc701a48407",
       },
     });
     console.log(response);
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") === undefined) {
+    if (sessionStorage.getItem("token") === null) {
       navigate("/login");
     }
 

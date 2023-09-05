@@ -7,7 +7,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") === undefined) {
+    if (sessionStorage.getItem("token") === null) {
       navigate("/login");
     } else {
       navigate("/member-club");
