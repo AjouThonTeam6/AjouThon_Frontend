@@ -1,11 +1,149 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import InfoBox from "../../../components/infobox/InfoBox";
 import styled from "styled-components";
 import ClubTable from "../../../components/ClubTale";
 import { studentClubColumn } from "../../../model/tableModel";
-import { useState } from "react";
-import { json } from "stream/consumers";
+
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import {
+  studentAcademyListAtom,
+  studentCircleListAtom,
+} from "../../../atoms/memberAtom";
+
+const MemberClub = () => {
+  //동아리 회원 관리 페이지
+
+  const navigate = useNavigate();
+  const academyList = useRecoilValue(studentAcademyListAtom);
+  const circleList = useRecoilValue(studentCircleListAtom);
+  
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setSelectedFile(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = handleFileRead;
+      reader.readAsText(file);
+    }
+  };
+
+  const handleFileRead = (event: ProgressEvent<FileReader>) => {
+    if (event.target && event.target.result) {
+      const content = event.target.result as string;
+      const jsonData = parseCSVToJSON(content);
+      console.log(parseCSVToJSONstudentID(content));
+      console.log(jsonData);
+    }
+  };
+
+  const parseCSVToJSON = (csvContent:string) => {
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',');
+
+    const jsonData = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',');
+      const entry = {};
+
+      for (let j = 0; j < headers.length; j++) {
+        const header = headers[j].trim().replace(/"/g, '');
+        const data = values[j].trim().replace(/"/g, '');
+        entry[header] = data;
+      }
+      jsonData.push(entry);
+    }
+
+    return jsonData;
+  };
+
+  const parseCSVToJSONstudentID = (csvContent:string) => {
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',').map((item)=>item.trim().replace(/"/g, ''));
+    const studentIDarr:string[]=[];
+    const jsonData = {}
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',').map((item)=>item.trim().replace(/"/g, ''));
+      // const entry = {};
+
+      for (let j = 0; j < headers.length; j++) {
+        const header = headers[j];
+        const data = values[j];
+        // entry[header] = data;
+        if (header==="학번"){studentIDarr.push(data)}
+      }
+    }
+    jsonData["학번"]=studentIDarr;
+    return jsonData;
+  };
+
+  const getDetail = async (fg: string, cd: string) => {
+    const response = await axios.get("/club", {
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+      params: {
+        meatngFg: fg,
+        meatngCd: cd,
+      },
+    });
+    console.log(response);
+  };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") === null) {
+      navigate("/login");
+    }
+
+    if (academyList && academyList[0]) {
+      getDetail(academyList[0].meatngFg, academyList[0].meatngCd);
+    }
+    if (circleList && circleList[0]) {
+      getDetail(circleList[0].meatngFg, circleList[0].meatngCd);
+    }
+  }, []);
+
+  return (
+    <OuterContainer>
+      <InfoBoxContainer>
+        <InfoBox title="전체 구성원" value={`${dummyData.length} 건`}></InfoBox>
+        <InfoBox title="입부 대기중" value={`${dummyData.length} 건`}></InfoBox>
+      </InfoBoxContainer>
+      <ClubTable
+        columnData={studentClubColumn}
+        datas={dummyData}
+        needCheckBox={true}
+      ></ClubTable>
+      <Outlet></Outlet>
+      <ButtonArea>
+        <SubmitButton
+          onClick={async () => {
+            await fetch("http://localhost:8000/upload/sheet", {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data));
+          }}
+        >
+          학사서비스 등록
+        </SubmitButton>
+        <Button>삭제</Button>
+      </ButtonArea>
+    </OuterContainer>
+  );
+};
+
+export default MemberClub;
 
 export const dummyData = [
   {
@@ -88,105 +226,3 @@ const SubmitButton = styled(Button)`
 const ButtonArea = styled.div`
   display: flex;
 `;
-
-const MemberClub = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setSelectedFile(file);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = handleFileRead;
-      reader.readAsText(file);
-    }
-  };
-
-  const handleFileRead = (event: ProgressEvent<FileReader>) => {
-    if (event.target && event.target.result) {
-      const content = event.target.result as string;
-      const jsonData = parseCSVToJSON(content);
-      console.log(parseCSVToJSONstudentID(content));
-      console.log(jsonData);
-    }
-  };
-
-  const parseCSVToJSON = (csvContent:string) => {
-    const lines = csvContent.split('\n');
-    const headers = lines[0].split(',');
-
-    const jsonData = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(',');
-      const entry = {};
-
-      for (let j = 0; j < headers.length; j++) {
-        const header = headers[j].trim().replace(/"/g, '');
-        const data = values[j].trim().replace(/"/g, '');
-        entry[header] = data;
-      }
-      jsonData.push(entry);
-    }
-
-    return jsonData;
-  };
-
-  const parseCSVToJSONstudentID = (csvContent:string) => {
-    const lines = csvContent.split('\n');
-    const headers = lines[0].split(',').map((item)=>item.trim().replace(/"/g, ''));
-    const studentIDarr:string[]=[];
-    const jsonData = {}
-
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(',').map((item)=>item.trim().replace(/"/g, ''));
-      // const entry = {};
-
-      for (let j = 0; j < headers.length; j++) {
-        const header = headers[j];
-        const data = values[j];
-        // entry[header] = data;
-        if (header==="학번"){studentIDarr.push(data)}
-      }
-    }
-    jsonData["학번"]=studentIDarr;
-    return jsonData;
-  };
-
-  return (
-    <OuterContainer>
-      <InfoBoxContainer>
-        <InfoBox title="전체 구성원" value={`${dummyData.length} 건`}></InfoBox>
-        <InfoBox title="입부 대기중" value={`${dummyData.length} 건`}></InfoBox>
-      </InfoBoxContainer>
-      <ClubTable
-        columnData={studentClubColumn}
-        datas={dummyData}
-        needCheckBox={true}
-      ></ClubTable>
-      <Outlet></Outlet>
-      <ButtonArea>
-        <SubmitButton
-          onClick={async () => {
-            await fetch("http://localhost:8000/upload/sheet", {
-              method: "POST",
-              headers: {
-                accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => console.log(data));
-          }}
-        >
-          학사서비스 등록
-        </SubmitButton>
-        <Button>삭제</Button>
-      </ButtonArea>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
-    </OuterContainer>
-  );
-};
-
-export default MemberClub;

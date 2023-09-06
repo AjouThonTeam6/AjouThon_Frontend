@@ -54,6 +54,7 @@ const Header = () => {
       <LogoutArea
         onClick={() => {
           setAccount({ id: "", pw: "" });
+          sessionStorage.removeItem("token");
           navigate("/login");
         }}
       >

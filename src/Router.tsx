@@ -53,7 +53,6 @@ export default Router;
 
 const TopContainer = styled.div`
   display: flex;
-  width: 1440px;
-  height: 900px;
-  border: 1px solid black;
+  width: 100%;
+  height: 100%;
 `;
