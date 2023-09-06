@@ -4,6 +4,7 @@ import InfoBox from "../../../components/infobox/InfoBox";
 import styled from "styled-components";
 import ClubTable from "../../../components/ClubTale";
 import { studentClubColumn } from "../../../model/tableModel";
+
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import {
@@ -17,6 +18,70 @@ const MemberClub = () => {
   const navigate = useNavigate();
   const academyList = useRecoilValue(studentAcademyListAtom);
   const circleList = useRecoilValue(studentCircleListAtom);
+  
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setSelectedFile(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = handleFileRead;
+      reader.readAsText(file);
+    }
+  };
+
+  const handleFileRead = (event: ProgressEvent<FileReader>) => {
+    if (event.target && event.target.result) {
+      const content = event.target.result as string;
+      const jsonData = parseCSVToJSON(content);
+      console.log(parseCSVToJSONstudentID(content));
+      console.log(jsonData);
+    }
+  };
+
+  const parseCSVToJSON = (csvContent:string) => {
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',');
+
+    const jsonData = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',');
+      const entry = {};
+
+      for (let j = 0; j < headers.length; j++) {
+        const header = headers[j].trim().replace(/"/g, '');
+        const data = values[j].trim().replace(/"/g, '');
+        entry[header] = data;
+      }
+      jsonData.push(entry);
+    }
+
+    return jsonData;
+  };
+
+  const parseCSVToJSONstudentID = (csvContent:string) => {
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',').map((item)=>item.trim().replace(/"/g, ''));
+    const studentIDarr:string[]=[];
+    const jsonData = {}
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',').map((item)=>item.trim().replace(/"/g, ''));
+      // const entry = {};
+
+      for (let j = 0; j < headers.length; j++) {
+        const header = headers[j];
+        const data = values[j];
+        // entry[header] = data;
+        if (header==="학번"){studentIDarr.push(data)}
+      }
+    }
+    jsonData["학번"]=studentIDarr;
+    return jsonData;
+  };
 
   const getDetail = async (fg: string, cd: string) => {
     const response = await axios.get("/club", {
